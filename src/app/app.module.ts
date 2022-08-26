@@ -4,6 +4,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
+import { SharedModule } from './components/views/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { environment } from 'src/environments/environment';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

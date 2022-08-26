@@ -1,1 +1,59 @@
-<p>employees-form works!</p>
+<h3 class="text-center mb-4">Nuevo Empleado</h3>
+<hr />
+<form [formGroup]="employeeForm" class="row g-3" (submit)="onSubmit()">
+  <div class="col-md-6">
+    <label for="name">Nombre</label>
+    <input
+      formControlName="name"
+      type="text"
+      name="name"
+      class="form-control"
+      placeholder="Nombre del empleado"
+    />
+    <small *ngIf="showWarning('name')" class="text-danger">
+      * Es requerido el nombre
+    </small>
+  </div>
+  <div class="col-md-6">
+    <label for="lastName">Apellido</label>
+    <input
+      formControlName="lastName"
+      type="text"
+      name="lastName"
+      class="form-control"
+      placeholder="Apellido del empleado"
+    />
+    <small *ngIf="showWarning('lastName')" class="text-danger">
+      * Es requerido el apellido
+    </small>
+  </div>
+  <div class="col-md-6">
+    <label for="email">Email</label>
+    <input
+      formControlName="email"
+      type="text"
+      name="email"
+      class="form-control"
+      placeholder="Email del empleado"
+    />
+    <small *ngIf="showWarning('email')" class="text-danger">
+      * Es requerido el email
+    </small>
+  </div>
+  <div class="col-md-6">
+    <label for="startDate">Fecha de Ingreso</label>
+    <input
+      formControlName="startDate"
+      type="date"
+      name="startDate"
+      class="form-control"
+    />
+    <small *ngIf="showWarning('startDate')" class="text-danger">
+      * Es requerido la fecha de ingreso
+    </small>
+  </div>
+
+  <div class="col-12 mt-4">
+    <button type="submit" class="btn btn-primary">Agregar</button>
+  </div>
+</form>

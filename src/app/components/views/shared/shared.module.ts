@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { LimitStringPipe } from './pipes/limit-string.pipe';
 import { EmployeesFormComponent } from './utils/employees-form/employees-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +15,15 @@ import { EmployeesFormComponent } from './utils/employees-form/employees-form.co
     EmployeesFormComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule
+  ],
+  exports:[
+    EmployeesFormComponent,
+    LimitStringPipe,
+    NavbarComponent,
+    
   ]
 })
 export class SharedModule { }
