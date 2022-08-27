@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IEmployee } from 'src/app/interfaces/employees.interface';
 
@@ -8,16 +8,24 @@ import { IEmployee } from 'src/app/interfaces/employees.interface';
   templateUrl: './employees-form.component.html',
   styleUrls: ['./employees-form.component.css']
 })
-export class EmployeesFormComponent implements OnInit {
+export class EmployeesFormComponent implements OnInit,AfterViewInit  {
+
+  @ViewChild('titulo') titulo:ElementRef = new ElementRef({});
 
   @Output() eventSave = new EventEmitter<IEmployee>();
 
   employeeForm: FormGroup = new FormGroup({});
 
+  text:string = "Hola";
+
   constructor(
     private formBuilder: FormBuilder
   ) {
     this.buildForm();
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.titulo);
   }
 
   ngOnInit(): void {
@@ -35,6 +43,7 @@ export class EmployeesFormComponent implements OnInit {
 
   onSubmit() {
     if (this.employeeForm.invalid) {
+      this.text = "eeeee"
       this.employeeForm.markAllAsTouched();
       return;
     }
