@@ -5,25 +5,21 @@
       <th scope="col">Nombre</th>
       <th scope="col">Apellido</th>
       <th scope="col">Fecha de Ingreso</th>
+      <th scope="col">FOpciones</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
+    <tr *ngFor="let employee of employees">
+      <th scope="row">{{ employee.id }}</th>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.lastName }}</td>
+      <td>{{ employee.startDate }}</td>
+      <td>
+        <button class="btn btn-info" (click)="edit(employee.id)">edit</button>
+        <button class="btn btn-danger" (click)="delete(employee.id)">
+          delete
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
@@ -35,4 +31,10 @@
 
   2. al hacer click en el boton de editar lo va a redirigir al componente de editar, esa ruta lleva como parametro el id
   3. recuperar el parametro
-  4. hacer el evento del click - guiar del componente new -->
+  4. hacer el evento del click - guiar del componente new 
+
+  5. que enviar al componente del form una entrada que se llame "edit:boolean"
+  6. con la entrada de edit van a cambiar textos
+  7. setear los valores al formulario
+  8. funcionalidad para editar
+-->

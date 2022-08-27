@@ -12,11 +12,7 @@ export class EmployeesService {
 
   constructor(private _fireStore: AngularFirestore
   ) { }
-
-  addEmployee(employee: IEmployee){
-    return this._fireStore.collection<IEmployee>(this.EMPLOYEES_COLLECTION).add(employee);
-  }
-
+  
   getEmployess$(){
     return this._fireStore.collection<IEmployee>(this.EMPLOYEES_COLLECTION).snapshotChanges()
     .pipe(
@@ -28,4 +24,30 @@ export class EmployeesService {
       }))
     )
   }
+
+  getEmployee$(id:string){
+    return this._fireStore.collection<IEmployee>(this.EMPLOYEES_COLLECTION).doc(id).snapshotChanges()
+      .pipe(
+        map(element => {
+          return {
+            id: element.payload.id,
+          ...element.payload.data() as IEmployee
+          }
+        })
+      )
+  }
+
+  addEmployee(employee: IEmployee){
+    return this._fireStore.collection<IEmployee>(this.EMPLOYEES_COLLECTION).add(employee);
+  }
+  
+  editEmployee(id:string, employee:IEmployee){
+    return this._fireStore.collection<IEmployee>(this.EMPLOYEES_COLLECTION).doc(id).update(employee);
+  }
+
+  deleteEmployee(id:string){
+    return this._fireStore.collection<IEmployee>(this.EMPLOYEES_COLLECTION).doc(id).delete();
+  }
+
+
 }
