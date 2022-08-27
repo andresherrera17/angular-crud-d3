@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IEmployee } from 'src/app/interfaces/employees.interface';
+
 
 @Component({
   selector: 'app-employees-form',
@@ -8,6 +10,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 })
 export class EmployeesFormComponent implements OnInit {
 
+  @Output() eventSave = new EventEmitter<IEmployee>();
 
   employeeForm: FormGroup = new FormGroup({});
 
@@ -35,6 +38,8 @@ export class EmployeesFormComponent implements OnInit {
       this.employeeForm.markAllAsTouched();
       return;
     }
+
+    this.eventSave.emit(this.employeeForm.value);
   }
 
   showWarning(controlName: string) {
