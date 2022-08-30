@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { IEmployee } from 'src/app/interfaces/employees.interface';
 import { EmployeesService } from 'src/app/services/employees.service';
 import { MessagesService } from 'src/app/services/messages.service';
@@ -14,7 +15,8 @@ export class NewComponent implements OnInit,AfterViewInit {
   @ViewChild(EmployeesFormComponent) employee: EmployeesFormComponent;
   constructor(
     private _employeeService: EmployeesService,
-    private _messageService: MessagesService
+    private _messageService: MessagesService,
+    private spinner: NgxSpinnerService
     ) { }
 
   ngOnInit(): void {
@@ -25,11 +27,14 @@ export class NewComponent implements OnInit,AfterViewInit {
   }
 
   addEmployee(employee:IEmployee){
+    this.spinner.show();
     this._employeeService.addEmployee(employee)
       .then(res => {
+        this.spinner.hide();
         this._messageService.successMessage("Empleado agregado", "El empleado ha sido agregado exitosamente");
       })
       .catch(err => {
+        this.spinner.hide();
         this._messageService.errorMessage("Error", "No fue posible agregar añl empleado", err.message);
       })
   }
